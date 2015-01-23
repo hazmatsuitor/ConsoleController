@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Project Files
+*.cbp
+*.depend
+*.layout
+main.cpp
