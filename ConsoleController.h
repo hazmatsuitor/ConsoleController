@@ -67,9 +67,13 @@ class ConsoleController {
 
         template <typename TYPE>
         void output(TYPE t) {
+#ifdef _WIN32 //slight performance improvement for Windows
+            std::cout << t; //avoids expensive stringstream construction
+#else
             std::stringstream ss;
             ss << t;
             output(ss.str());
+#endif // _WIN32
         }
 
         template <typename TYPE>
@@ -91,7 +95,7 @@ class ConsoleController {
             output(t);
         }
 
-        //fix for the commonly distributed GCC bug where std::to_string() doesn't work
+        //fix for the commonly distributed GCC bug with std::to_string()
         template <typename TYPE>
         std::string toString(TYPE t) {
             std::stringstream ss;
