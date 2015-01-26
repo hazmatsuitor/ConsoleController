@@ -354,9 +354,3 @@ void ConsoleController::pause() {
     waitForKey();
     output("\n");
 }
-
-/////////////////////////////////////////////////
-
-ConsoleController& ConsoleController::operator<< (std::string str) {
-    output(str);
-}

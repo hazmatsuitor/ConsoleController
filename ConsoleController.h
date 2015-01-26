@@ -146,7 +146,10 @@ class ConsoleController {
         void pause();
 
         // Operator overloads
-        ConsoleController& operator<< (std::string str);
+        template<typename TYPE>
+        ConsoleController& operator<< (TYPE t) {
+            output(t);
+        }
 
     private:
         // Define types
