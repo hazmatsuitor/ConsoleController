@@ -149,6 +149,7 @@ class ConsoleController {
         template<typename TYPE>
         ConsoleController& operator<< (TYPE t) {
             output(t);
+            return *this;
         }
 
     private:
