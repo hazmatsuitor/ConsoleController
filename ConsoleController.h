@@ -141,6 +141,9 @@ class ConsoleController {
         void clearKey();
         void pause();
 
+        // Operator overloads
+        ConsoleController& operator<< (std::string str);
+
     private:
         // Define types
         struct COLOR {
