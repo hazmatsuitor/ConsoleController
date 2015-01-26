@@ -152,6 +152,13 @@ class ConsoleController {
             return *this;
         }
 
+        template<typename TYPE>
+        ConsoleController& operator>> (TYPE& t) {
+            t = waitForInput<TYPE>();
+            return *this;
+        }
+
+
     private:
         // Define types
         struct COLOR {
