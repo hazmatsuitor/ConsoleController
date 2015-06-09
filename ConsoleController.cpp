@@ -129,6 +129,10 @@ void ConsoleController::moveCursor(int x, int y) {
 #endif
 }
 
+void ConsoleController::moveCursor(COORD_2D pos) {
+    moveCursor(pos.x, pos.y);
+}
+
 //TODO: make the windows side of this function not unnecessarily ugly
 void ConsoleController::color(COLOR_ID colorId) {
 #ifdef _WIN32

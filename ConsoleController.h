@@ -60,7 +60,16 @@ class ConsoleController {
         // Actions
         void cls();
         void moveCursor(int x, int y);
+        void moveCursor(COORD_2D pos);
         void color(COLOR_ID);
+
+        //fix for the commonly distributed GCC bug with std::to_string()
+        template <typename TYPE>
+        std::string toString(TYPE t) {
+            std::stringstream ss;
+            ss << t;
+            return ss.str();
+        }
 
         // Output
         void output(std::string s);
@@ -70,9 +79,7 @@ class ConsoleController {
 #ifdef _WIN32 //slight performance improvement for Windows
             std::cout << t; //avoids expensive stringstream construction
 #else
-            std::stringstream ss;
-            ss << t;
-            output(ss.str());
+            output(toString(t));
 #endif // _WIN32
         }
 
@@ -89,18 +96,23 @@ class ConsoleController {
         }
 
         template <typename TYPE>
+        void output(COORD_2D pos, TYPE t) {
+            moveCursor(pos);
+            output(t);
+        }
+
+        template <typename TYPE>
         void output(int x, int y, COLOR_ID c, TYPE t) {
             moveCursor(x, y);
             color(c);
             output(t);
         }
 
-        //fix for the commonly distributed GCC bug with std::to_string()
         template <typename TYPE>
-        std::string toString(TYPE t) {
-            std::stringstream ss;
-            ss << t;
-            return ss.str();
+        void output(COORD_2D pos, COLOR_ID c, TYPE t) {
+            moveCursor(pos);
+            color(c);
+            output(t);
         }
 
         // Input
